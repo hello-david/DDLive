@@ -23,7 +23,7 @@
 
 + (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu;
 - (instancetype)initWithDelegate:(id<DDLiveH264DecoderDelegate>)delegate;
-- (void)decodeH264WithNalus:(NSData *)nalus;
+- (void)decodeH264WithNaluStream:(NSData *)nalus;
 - (void)decodeH264WithAVAsset:(AVAsset *)asset;
 - (void)stopDecoder;
 @end

@@ -15,5 +15,5 @@
 @interface DDLiveTools : NSObject
 
 + (UIImage *)pixelBufferToImage:(CVPixelBufferRef)pixelBuffer;
-
++ (CVPixelBufferRef)imageToPixelBuffer:(UIImage *)image;
 @end

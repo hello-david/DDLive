@@ -9,12 +9,14 @@
 #import "DDLiveH264Decoder.h"
 
 @interface DDLiveH264Decoder()
-@property (nonatomic, assign) VTDecompressionSessionRef decoderSession;
-@property (nonatomic, assign) CMVideoFormatDescriptionRef videoFormatDESC;
+{
+    VTDecompressionSessionRef _decoderSession;
+    CMVideoFormatDescriptionRef _videoFormatDESC;
+    dispatch_queue_t _decodeThread;
+}
 @property (nonatomic, strong) NSData *spsData;
 @property (nonatomic, strong) NSData *ppsData;
 @property (nonatomic, assign) BOOL isGetFirstIFrame;
-@property (nonatomic, strong) dispatch_queue_t decodeThread;
 @end
 
 @implementation DDLiveH264Decoder
@@ -27,17 +29,16 @@
 }
 
 - (instancetype)initWithDelegate:(id<DDLiveH264DecoderDelegate>)delegate {
-    if(!self){
-        self = [super init];
+    if(self = [super init]){
         self.delegate = delegate;
-        self.decodeThread = dispatch_queue_create("com.DDLiveDecodeThread", NULL);
+        _decodeThread = dispatch_queue_create("com.ddlive.h264decoder", NULL);
     }
     return self;
 }
 
-- (void)decodeH264WithNalus:(NSData *)nalus {
-    dispatch_sync(_decodeThread, ^{
-        [self decodeProcess:nalus];
+- (void)decodeH264WithNaluStream:(NSData *)nalus {
+    dispatch_async(_decodeThread, ^{
+       [self decodeProcess:nalus];
     });
 }
 
@@ -159,7 +160,6 @@
         }
             
         default: {
-            NSLog(@"H264 Decoder Unkonw frame Type");
             return;
         }
     }
