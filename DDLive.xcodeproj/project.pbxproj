@@ -16,11 +16,12 @@
 		3A06C0B520A51CA20097975E /* DDLiveH264Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0B420A51CA20097975E /* DDLiveH264Encoder.m */; };
 		3A06C0B820A51CAD0097975E /* DDLiveH264Decoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0B720A51CAD0097975E /* DDLiveH264Decoder.m */; };
 		3A06C0BB20A529980097975E /* DDLiveAVCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0BA20A529980097975E /* DDLiveAVCapture.m */; };
-		3A06C0BE20A52A920097975E /* DDLiveAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0BD20A52A920097975E /* DDLiveAACEncoder.m */; };
 		3A06C0C120A52A9D0097975E /* DDLiveAACDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0C020A52A9D0097975E /* DDLiveAACDecoder.m */; };
 		3A06C0CA20A52FC90097975E /* DDLiveFlvMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0C920A52FC90097975E /* DDLiveFlvMixer.m */; };
 		3A06C0CD20A5314E0097975E /* DDLiveRtmpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0CC20A5314E0097975E /* DDLiveRtmpClient.m */; };
 		3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0CF20A531BB0097975E /* DDLivePlayer.m */; };
+		63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */; };
+		63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */; };
 		6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6305769D20A6C8D9006FC772 /* DDLiveTools.m */; };
 		C9E04459E8A838CD848A0968 /* libPods-DDLive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */; };
 /* End PBXBuildFile section */
@@ -43,16 +44,17 @@
 		3A06C0B920A529980097975E /* DDLiveAVCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveAVCapture.h; sourceTree = "<group>"; };
 		3A06C0BA20A529980097975E /* DDLiveAVCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveAVCapture.m; sourceTree = "<group>"; };
 		3A06C0BC20A52A920097975E /* DDLiveAACEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveAACEncoder.h; sourceTree = "<group>"; };
-		3A06C0BD20A52A920097975E /* DDLiveAACEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACEncoder.m; sourceTree = "<group>"; };
 		3A06C0BF20A52A9D0097975E /* DDLiveAACDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveAACDecoder.h; sourceTree = "<group>"; };
 		3A06C0C020A52A9D0097975E /* DDLiveAACDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACDecoder.m; sourceTree = "<group>"; };
-		3A06C0C520A52B940097975E /* DDLiveH264Codec.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveH264Codec.h; sourceTree = "<group>"; };
 		3A06C0C820A52FC90097975E /* DDLiveFlvMixer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvMixer.h; sourceTree = "<group>"; };
 		3A06C0C920A52FC90097975E /* DDLiveFlvMixer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvMixer.m; sourceTree = "<group>"; };
 		3A06C0CB20A5314E0097975E /* DDLiveRtmpClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpClient.h; sourceTree = "<group>"; };
 		3A06C0CC20A5314E0097975E /* DDLiveRtmpClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpClient.m; sourceTree = "<group>"; };
 		3A06C0CE20A531BB0097975E /* DDLivePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLivePlayer.h; sourceTree = "<group>"; };
 		3A06C0CF20A531BB0097975E /* DDLivePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLivePlayer.m; sourceTree = "<group>"; };
+		63030D7220A7EDC300524DB7 /* DDLiveCodecTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveCodecTools.h; sourceTree = "<group>"; };
+		63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveCodecTools.m; sourceTree = "<group>"; };
+		63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACEncoder.m; sourceTree = "<group>"; };
 		6305769C20A6C8D9006FC772 /* DDLiveTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveTools.h; sourceTree = "<group>"; };
 		6305769D20A6C8D9006FC772 /* DDLiveTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveTools.m; sourceTree = "<group>"; };
 		94C728A1D438E57EB52E48DB /* Pods-DDLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.release.xcconfig"; sourceTree = "<group>"; };
@@ -121,13 +123,14 @@
 		3A06C0AC20A51A5A0097975E /* Codec */ = {
 			isa = PBXGroup;
 			children = (
-				3A06C0C520A52B940097975E /* DDLiveH264Codec.h */,
+				63030D7220A7EDC300524DB7 /* DDLiveCodecTools.h */,
+				63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */,
 				3A06C0B320A51CA20097975E /* DDLiveH264Encoder.h */,
 				3A06C0B420A51CA20097975E /* DDLiveH264Encoder.m */,
 				3A06C0B620A51CAD0097975E /* DDLiveH264Decoder.h */,
 				3A06C0B720A51CAD0097975E /* DDLiveH264Decoder.m */,
 				3A06C0BC20A52A920097975E /* DDLiveAACEncoder.h */,
-				3A06C0BD20A52A920097975E /* DDLiveAACEncoder.m */,
+				63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */,
 				3A06C0BF20A52A9D0097975E /* DDLiveAACDecoder.h */,
 				3A06C0C020A52A9D0097975E /* DDLiveAACDecoder.m */,
 			);
@@ -278,14 +281,15 @@
 				3A06C0B820A51CAD0097975E /* DDLiveH264Decoder.m in Sources */,
 				3A06C0BB20A529980097975E /* DDLiveAVCapture.m in Sources */,
 				3A06C0CA20A52FC90097975E /* DDLiveFlvMixer.m in Sources */,
-				3A06C0BE20A52A920097975E /* DDLiveAACEncoder.m in Sources */,
 				3A06C09820A5193C0097975E /* ViewController.m in Sources */,
 				6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */,
 				3A06C0A320A5193C0097975E /* main.m in Sources */,
 				3A06C0CD20A5314E0097975E /* DDLiveRtmpClient.m in Sources */,
 				3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */,
+				63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */,
 				3A06C0B520A51CA20097975E /* DDLiveH264Encoder.m in Sources */,
 				3A06C09520A5193C0097975E /* AppDelegate.m in Sources */,
+				63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */,
 				3A06C0C120A52A9D0097975E /* DDLiveAACDecoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

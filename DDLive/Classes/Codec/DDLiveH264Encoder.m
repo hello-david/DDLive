@@ -45,8 +45,8 @@
     if (status != noErr)
     {
         NSLog(@"H264: VTCompressionSessionCreate fail %d", (int)status);
-        if(self.delegate && [self respondsToSelector:@selector(didDDLiveH264CompressError:)]) {
-            [self.delegate didDDLiveH264CompressError:[NSError errorWithDomain:@"Unable to create a H264 Encoder Session" code:status userInfo:nil]];
+        if(self.delegate && [self respondsToSelector:@selector(didH264CompressError:)]) {
+            [self.delegate didH264CompressError:[NSError errorWithDomain:@"Unable to create a H264 Encoder Session" code:status userInfo:nil]];
         }
         return ;
     }
@@ -55,22 +55,27 @@
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_Baseline_AutoLevel);
     
-    // 设置关键帧间隔,每x帧输出1张关键帧（和帧率有关）
+    // 设置关键帧间隔,每x帧输出1张关键帧(和帧率有关),由于动态帧率时间可能不固定
     int frameInterval = 60;
     CFNumberRef  frameIntervalRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &frameInterval);
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_MaxKeyFrameInterval, frameIntervalRef);
     
-    // 设置期望帧率，每秒希望有多少帧数据
+    // 设置关键帧间隔,每y秒输出1张关键帧,时间固定与前一个属性谁先达成谁生效
+    int frameDuration = 2;
+    CFNumberRef  frameDurationRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &frameDuration);
+    VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration, frameDurationRef);
+    
+    // 设置期望帧率,每秒希望有多少帧数据
     _fps = 30;
     CFNumberRef  fpsRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &_fps);
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_ExpectedFrameRate, fpsRef);
     
-    // 设置码率均值，单位是bps
+    // 设置码率均值,单位是bps
     int bitRate = (int)width * (int)height * 3 * 8;//平均1920*1080 3M/B
     CFNumberRef bitRateRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &bitRate);
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_AverageBitRate, bitRateRef);
     
-    // 设置码率上限，单位是byte
+    // 设置码率上限,单位是byte
     int bitRateLimit = (int)width * (int)height * 10;//最高1920*1080 10M/B左右
     CFNumberRef bitRateLimitRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &bitRateLimit);
     VTSessionSetProperty(_encoderSession, kVTCompressionPropertyKey_DataRateLimits, bitRateLimitRef);
@@ -83,33 +88,30 @@
 
 - (void)encodeH264WithSampleBuffer:(CMSampleBufferRef)buffer {
     if(!_isInitialized || !buffer) return;
-    
-    __block CMSampleBufferRef currentBuffer;
-    CMSampleBufferCreateCopy(kCFAllocatorDefault, buffer, &currentBuffer);
+    CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(buffer);
+    [self encodeH264WithPixelBuffer:imageBuffer];
+}
+
+- (void)encodeH264WithPixelBuffer:(CVPixelBufferRef)buffer {
+    if(!_isInitialized) return;
+    CVPixelBufferRetain(buffer);
     dispatch_async(_encoderQueue, ^{
-        CVImageBufferRef imageBuffer = (CVImageBufferRef)CMSampleBufferGetImageBuffer(currentBuffer);
         CMTime presentationTimeStamp = CMTimeMake(_frameCount++, _fps);
         VTEncodeInfoFlags flags;
         OSStatus status = VTCompressionSessionEncodeFrame(_encoderSession,
-                                                          imageBuffer,
+                                                          buffer,
                                                           presentationTimeStamp,
                                                           kCMTimeInvalid,
                                                           NULL, NULL, &flags);
         if (status != noErr) {
             NSLog(@"H264: VTCompressionSessionEncodeFrame failed with %d", (int)status);
-            if(self.delegate && [self respondsToSelector:@selector(didDDLiveH264CompressError:)]) {
-                [self.delegate didDDLiveH264CompressError:[NSError errorWithDomain:@"VTCompressionSessionEncodeFrame failed" code:status userInfo:nil]];
+            if(self.delegate && [self respondsToSelector:@selector(didH264CompressError:)]) {
+                [self.delegate didH264CompressError:[NSError errorWithDomain:@"VTCompressionSessionEncodeFrame failed" code:status userInfo:nil]];
             }
             [self stopEncoder];
             return;
         }
-        CFRelease(currentBuffer);
-    });
-}
-
-- (void)encodeH264WithPixelBuffer:(CVPixelBufferRef)buffer {
-    if(!_isInitialized) return;
-    dispatch_async(_encoderQueue, ^{
+        CVPixelBufferRelease(buffer);
     });
 }
 
@@ -167,11 +169,12 @@ void didCompress(void * CM_NULLABLE outputCallbackRefCon,
                                                                                      &pparameterSetCount, 0 );
             if (statusCode == noErr)
             {
-                // Found pps
                 NSData *sps = [NSData dataWithBytes:sparameterSet length:sparameterSetSize];
                 NSData *pps = [NSData dataWithBytes:pparameterSet length:pparameterSetSize];
-                [encoder.delegate didDDLiveH264Compress:[encoder getStandardNalu:sps]];
-                [encoder.delegate didDDLiveH264Compress:[encoder getStandardNalu:pps]];
+                if(encoder.delegate && [(id)encoder.delegate respondsToSelector:@selector(didH264Compress:)]){
+                    [encoder.delegate didH264Compress:[encoder getStandardNalu:sps]];
+                    [encoder.delegate didH264Compress:[encoder getStandardNalu:pps]];
+                }
                 encoder.isGetMediaInfo = YES;
             }
         }
@@ -195,7 +198,9 @@ void didCompress(void * CM_NULLABLE outputCallbackRefCon,
             NSData* naluData = [[NSData alloc] initWithBytes:(dataPointer + bufferOffset + AVCCHeaderLength) length:NALUnitLength];
             
             // 回调
-            [encoder.delegate didDDLiveH264Compress:[encoder getStandardNalu:naluData]];
+            if(encoder.delegate && [(id)encoder.delegate respondsToSelector:@selector(didH264Compress:)]){
+                [encoder.delegate didH264Compress:[encoder getStandardNalu:naluData]];
+            }
             
             // 获取下一个NALU
             bufferOffset += AVCCHeaderLength + NALUnitLength;

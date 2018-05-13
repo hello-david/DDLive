@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDLiveCodecTools.h"
 
 @interface DDLiveAACDecoder : NSObject
 
+- (void)decodeAACBuffer:(NSData *)adtsAAC
+        completionBlock:(void (^)(NSData * pcmData, NSError* error))completionBlock;
 @end

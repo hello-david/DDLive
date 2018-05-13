@@ -13,12 +13,16 @@
 #import "DDLiveTools.h"
 #import "DDLiveH264Encoder.h"
 #import "DDLiveH264Decoder.h"
+#import "DDLiveAACEncoder.h"
+#import "DDLiveAACDecoder.h"
 
 @interface ViewController () <DDLiveAVCaptureDelegate, DDLiveH264EncoderDelegate, DDLiveH264DecoderDelegate>
 @property (nonatomic, strong) UIImageView *cameraImageView;
 @property (nonatomic, strong) DDLiveAVCapture *capture;
-@property (nonatomic, strong) DDLiveH264Encoder *encoder;
-@property (nonatomic, strong) DDLiveH264Decoder *decoder;
+@property (nonatomic, strong) DDLiveH264Encoder *h264Encoder;
+@property (nonatomic, strong) DDLiveH264Decoder *h264Decoder;
+@property (nonatomic, strong) DDLiveAACEncoder *aacEncoder;
+@property (nonatomic, strong) DDLiveAACDecoder *aacDecoder;
 @end
 
 @implementation ViewController
@@ -38,32 +42,33 @@
 
 #pragma mark - Delegate
 - (void)didGetVideoBuffer:(CMSampleBufferRef)sampleBuffer {
-    [self.encoder encodeH264WithSampleBuffer:sampleBuffer];
-    
-    CVPixelBufferRef pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    UIImage *image = [DDLiveTools pixelBufferToImage:pixelBuffer];
-
+    [self.h264Encoder encodeH264WithSampleBuffer:sampleBuffer];
 }
 
 - (void)didGetAudioBuffer:(CMSampleBufferRef)sampleBuffer {
+    __weak typeof(self) weakSelf = self;
+    [self.aacEncoder encodeSampleBuffer:sampleBuffer completionBlock:^(NSData *encodedData, NSError *error) {
+        [weakSelf.aacDecoder decodeAACBuffer:encodedData completionBlock:^(NSData *pcmData, NSError *error) {
+            
+        }];
+    }];
+}
+
+- (void)didH264Compress:(NSData *)data {
+    [self.h264Decoder decodeH264WithNaluStream:data];
+}
+
+- (void)didH264CompressError:(NSError *)error {
     
 }
 
-- (void)didDDLiveH264Compress:(NSData *)data {
-    [self.decoder decodeH264WithNaluStream:data];
-}
-
-- (void)didDDLiveH264CompressError:(NSError *)error {
-    
-}
-
-- (void)didDDLiveH264Decompress:(UIImage *)image {
+- (void)didH264Decompress:(UIImage *)image {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.cameraImageView setImage:image];
     });
 }
 
-- (void)didDDLiveH264DecompressError:(NSError *)error {
+- (void)didH264DecompressError:(NSError *)error {
     
 }
 #pragma mark - Property
@@ -81,18 +86,32 @@
     return _capture;
 }
 
-- (DDLiveH264Encoder *)encoder {
-    if(!_encoder) {
-        _encoder = [[DDLiveH264Encoder alloc]initWithDelegate:self];
-        [_encoder configSessionWithWidth:640 height:480];
+- (DDLiveH264Encoder *)h264Encoder {
+    if(!_h264Encoder) {
+        _h264Encoder = [[DDLiveH264Encoder alloc]initWithDelegate:self];
+        [_h264Encoder configSessionWithWidth:640 height:480];
     }
-    return _encoder;
+    return _h264Encoder;
 }
 
-- (DDLiveH264Decoder *)decoder {
-    if(!_decoder) {
-        _decoder = [[DDLiveH264Decoder alloc]initWithDelegate:self];
+- (DDLiveH264Decoder *)h264Decoder {
+    if(!_h264Decoder) {
+        _h264Decoder = [[DDLiveH264Decoder alloc]initWithDelegate:self];
     }
-    return _decoder;
+    return _h264Decoder;
+}
+
+- (DDLiveAACEncoder *)aacEncoder {
+    if(!_aacEncoder) {
+        _aacEncoder = [[DDLiveAACEncoder alloc]init];
+    }
+    return _aacEncoder;
+}
+
+- (DDLiveAACDecoder *)aacDecoder {
+    if(!_aacDecoder) {
+        _aacDecoder = [[DDLiveAACDecoder alloc]init];
+    }
+    return _aacDecoder;
 }
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDLiveCodecTools.h"
 
 @interface DDLiveAACEncoder : NSObject
+
+- (void)encodeSampleBuffer:(CMSampleBufferRef)sampleBuffer
+           completionBlock:(void (^)(NSData * encodedData, NSError* error))completionBlock;
 
 @end

@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDLiveH264Codec.h"
 #import "DDLiveTools.h"
-
-@import VideoToolbox;
-@import AVFoundation;
+#import "DDLiveCodecTools.h"
 
 @protocol DDLiveH264DecoderDelegate <NSObject>
-- (void)didDDLiveH264Decompress:(UIImage *)image;
-- (void)didDDLiveH264DecompressError:(NSError *)error;
+- (void)didH264Decompress:(UIImage *)image;
+- (void)didH264DecompressError:(NSError *)error;
 @end
 
 @interface DDLiveH264Decoder : NSObject

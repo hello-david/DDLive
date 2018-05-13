@@ -8,13 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "DDLiveTools.h"
-
-@import VideoToolbox;
-@import AVFoundation;
+#import "DDLiveCodecTools.h"
 
 @protocol DDLiveH264EncoderDelegate
-- (void)didDDLiveH264Compress:(NSData *)data;
-- (void)didDDLiveH264CompressError:(NSError *)error;
+- (void)didH264Compress:(NSData *)data;
+- (void)didH264CompressError:(NSError *)error;
 @end
 
 @interface DDLiveH264Encoder : NSObject

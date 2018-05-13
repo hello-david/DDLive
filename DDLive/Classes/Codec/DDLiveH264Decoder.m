@@ -20,6 +20,7 @@
 @end
 
 @implementation DDLiveH264Decoder
+
 + (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu {
     NSInteger nalType;
     if(nalu.length < 4) return 0;
@@ -168,8 +169,8 @@
     OSStatus initState = [self h264DecoderSessionInit];
     if(initState != noErr) {
         [self stopDecoder];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(didDDLiveH264DecompressError:)]) {
-            [self.delegate didDDLiveH264DecompressError:[NSError errorWithDomain:@"H264 Init Session Error" code:initState userInfo:nil]];
+        if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]) {
+            [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Init Session Error" code:initState userInfo:nil]];
         }
         return;
     }
@@ -211,8 +212,8 @@
         free(data);
         
         [self stopDecoder];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(didDDLiveH264DecompressError:)]){
-            [self.delegate didDDLiveH264DecompressError:[NSError errorWithDomain:@"H264 Decoder nalu decode buffer create err" code:status userInfo:nil]];
+        if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]){
+            [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Decoder nalu decode buffer create err" code:status userInfo:nil]];
         }
         return;
     }
@@ -233,8 +234,8 @@
         CFRelease(blockBuffer);
         
         [self stopDecoder];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(didDDLiveH264DecompressError:)]){
-            [self.delegate didDDLiveH264DecompressError:[NSError errorWithDomain:@"H264 Decoder sample bufer create error" code:status userInfo:nil]];
+        if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]){
+            [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Decoder sample bufer create error" code:status userInfo:nil]];
         }
         return;
     }
@@ -254,8 +255,8 @@
     if(status != noErr) {
         NSLog(@"H264 Decoder: decode error status = %d", (int)status);
         [self stopDecoder];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(didDDLiveH264DecompressError:)]){
-            [self.delegate didDDLiveH264DecompressError:[NSError errorWithDomain:@"H264 Decoders decode failed" code:status userInfo:nil]];
+        if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]){
+            [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Decoders decode failed" code:status userInfo:nil]];
         }
     }
 }
@@ -272,8 +273,9 @@ static void didDecompress(void *decompressionOutputRefCon,
     UIImage *image = [DDLiveTools pixelBufferToImage:pixelBuffer];
     
     DDLiveH264Decoder *decoder = (__bridge DDLiveH264Decoder *)decompressionOutputRefCon;
-    if(decoder.delegate && [decoder.delegate respondsToSelector:@selector(didDDLiveH264Decompress:)]){
-        [decoder.delegate didDDLiveH264Decompress:image];
+    if(decoder.delegate && [decoder.delegate respondsToSelector:@selector(didH264Decompress:)]){
+        [decoder.delegate didH264Decompress:image];
     }
 }
+
 @end
