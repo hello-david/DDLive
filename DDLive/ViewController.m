@@ -15,6 +15,7 @@
 #import "DDLiveH264Decoder.h"
 #import "DDLiveAACEncoder.h"
 #import "DDLiveAACDecoder.h"
+#import "DDLivePCMPlayer.h"
 
 @interface ViewController () <DDLiveAVCaptureDelegate, DDLiveH264EncoderDelegate, DDLiveH264DecoderDelegate>
 @property (nonatomic, strong) UIImageView *cameraImageView;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) DDLiveH264Decoder *h264Decoder;
 @property (nonatomic, strong) DDLiveAACEncoder *aacEncoder;
 @property (nonatomic, strong) DDLiveAACDecoder *aacDecoder;
+@property (nonatomic, strong) DDLivePCMPlayer *pcmPlayer;
 @end
 
 @implementation ViewController
@@ -49,7 +51,7 @@
     __weak typeof(self) weakSelf = self;
     [self.aacEncoder encodeSampleBuffer:sampleBuffer completionBlock:^(NSData *encodedData, NSError *error) {
         [weakSelf.aacDecoder decodeAACBuffer:encodedData completionBlock:^(NSData *pcmData, NSError *error) {
-            
+            [weakSelf.pcmPlayer playPCM:pcmData];
         }];
     }];
 }
@@ -113,5 +115,12 @@
         _aacDecoder = [[DDLiveAACDecoder alloc]init];
     }
     return _aacDecoder;
+}
+
+- (DDLivePCMPlayer *)pcmPlayer {
+    if(!_pcmPlayer) {
+        _pcmPlayer = [[DDLivePCMPlayer alloc]init];
+    }
+    return _pcmPlayer;
 }
 @end

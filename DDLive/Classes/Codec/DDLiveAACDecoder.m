@@ -98,6 +98,7 @@ OSStatus decoderInInputDataProc(AudioConverterRef aAudioConverter,
 }
 
 - (void)decodeAACBuffer:(NSData *)adtsAAC completionBlock:(void (^)(NSData *, NSError *))completionBlock {
+    
     dispatch_async(_decoderQueue, ^{
         if(!_audioConverter){
             [self setupAudioConverter];
@@ -107,11 +108,12 @@ OSStatus decoderInInputDataProc(AudioConverterRef aAudioConverter,
         NSData *aacData = [DDLiveCodecTools aacRawDataFromADTSAAC:adtsAAC];
         
         struct PassthroughUserData userData = { 1, (UInt32)aacData.length, [aacData bytes]};
-        NSMutableData *decodedData = [NSMutableData new];
+        NSMutableData *decodedData = [[NSMutableData alloc]init];
 
         const uint32_t MAX_AUDIO_FRAMES = 128;
         const uint32_t maxDecodedSamples = MAX_AUDIO_FRAMES * 1;
-
+        
+        NSError *error = nil;
         do{
             uint8_t *buffer = (uint8_t *)malloc(maxDecodedSamples * sizeof(short int));
             AudioBufferList decBuffer;
@@ -135,27 +137,25 @@ OSStatus decoderInInputDataProc(AudioConverterRef aAudioConverter,
                                                               &numFrames /* in/out */,
                                                               &decBuffer,
                                                               &outPacketDescription);
-            NSError *error = nil;
             if (status && status != kNoMoreDataErr) {
                 NSLog(@"Error decoding audio stream: %d\n", status);
                 error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
-                dispatch_async(_callbackQueue, ^{
-                    completionBlock(nil, error);
-                });
+                decodedData = nil;
                 break;
             }
 
             if (numFrames) {
                 [decodedData appendBytes:decBuffer.mBuffers[0].mData length:decBuffer.mBuffers[0].mDataByteSize];
-                dispatch_async(_callbackQueue, ^{
-                    completionBlock(decodedData, nil);
-                });
             }
 
             if (status == kNoMoreDataErr) {
                 break;
             }
         }while (true);
+        
+        dispatch_async(_callbackQueue, ^{
+            completionBlock(decodedData, error);
+        });
     });
 }
 

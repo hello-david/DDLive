@@ -86,6 +86,7 @@ AVCaptureVideoDataOutputSampleBufferDelegate
     
     //intialize the AVCaputreDeviceInput instance with micphone device
     _audioInput = [[AVCaptureDeviceInput alloc]initWithDevice:_inputMicphone error:&error];
+    
     if(error){
         NSLog(@"micphone error");
     }

@@ -23,6 +23,7 @@
 		63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */; };
 		63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */; };
 		6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6305769D20A6C8D9006FC772 /* DDLiveTools.m */; };
+		633A73D920A86F720049E805 /* DDLivePCMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 633A73D820A86F720049E805 /* DDLivePCMPlayer.m */; };
 		C9E04459E8A838CD848A0968 /* libPods-DDLive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,8 @@
 		63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACEncoder.m; sourceTree = "<group>"; };
 		6305769C20A6C8D9006FC772 /* DDLiveTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveTools.h; sourceTree = "<group>"; };
 		6305769D20A6C8D9006FC772 /* DDLiveTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveTools.m; sourceTree = "<group>"; };
+		633A73D720A86F720049E805 /* DDLivePCMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLivePCMPlayer.h; sourceTree = "<group>"; };
+		633A73D820A86F720049E805 /* DDLivePCMPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLivePCMPlayer.m; sourceTree = "<group>"; };
 		94C728A1D438E57EB52E48DB /* Pods-DDLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.release.xcconfig"; sourceTree = "<group>"; };
 		F0201C2E73B8FD0E19488E71 /* Pods-DDLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.debug.xcconfig"; sourceTree = "<group>"; };
 		FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDLive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +145,8 @@
 			children = (
 				3A06C0CE20A531BB0097975E /* DDLivePlayer.h */,
 				3A06C0CF20A531BB0097975E /* DDLivePlayer.m */,
+				633A73D720A86F720049E805 /* DDLivePCMPlayer.h */,
+				633A73D820A86F720049E805 /* DDLivePCMPlayer.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				3A06C0CD20A5314E0097975E /* DDLiveRtmpClient.m in Sources */,
 				3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */,
 				63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */,
+				633A73D920A86F720049E805 /* DDLivePCMPlayer.m in Sources */,
 				3A06C0B520A51CA20097975E /* DDLiveH264Encoder.m in Sources */,
 				3A06C09520A5193C0097975E /* AppDelegate.m in Sources */,
 				63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */,

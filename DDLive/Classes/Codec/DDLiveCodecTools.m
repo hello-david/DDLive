@@ -40,6 +40,7 @@
 }
 
 + (NSData *)aacRawDataFromADTSAAC:(NSData *)adtsAAC {
+    if(!adtsAAC) return nil;
     int adtsLength = 7;
     if(adtsAAC.length < adtsLength) {
         NSLog(@"adts aac format error");
