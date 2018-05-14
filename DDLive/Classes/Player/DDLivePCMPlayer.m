@@ -128,12 +128,11 @@
 
 - (NSData *)getPlayFrameWithSize:(uint32_t)size {
     
+    if(!size) return nil;
+    
     NSData *pcmData = nil;
     NSInteger pcmLength = size;
     [_lock lock];
-    if(_audioBuffer.length < size){
-        pcmLength = _audioBuffer.length;
-    }
     pcmData = [_audioBuffer subdataWithRange:NSMakeRange(0, pcmLength)];
     [_audioBuffer replaceBytesInRange:NSMakeRange(0, pcmLength) withBytes:NULL length:0];
     [_lock unlock];
@@ -144,6 +143,8 @@
 -(void)stopPlayer {
     if(_audioUnit) {
         AudioOutputUnitStop(_audioUnit);
+        AudioUnitUninitialize(_audioUnit);
+        _audioUnit = NULL;
     }
 }
 
@@ -159,8 +160,7 @@ static OSStatus PlayCallback(void *inRefCon,
 
     AudioBuffer buffer = ioData -> mBuffers[0];
     
-    // 存10帧缓存
-    if (buffer.mDataByteSize * 10 < player.audioBuffer.length) {
+    if (player.audioBuffer.length) {
         uint32_t size = (uint32_t)MIN(player.audioBuffer.length, buffer.mDataByteSize);
         NSData *pcmData = [player getPlayFrameWithSize:size];
         memcpy(buffer.mData, [pcmData bytes], size);

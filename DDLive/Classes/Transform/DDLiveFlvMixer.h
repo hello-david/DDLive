@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDLiveFlvTag.h"
+
+@protocol DDLiveFlvMixerDelegate
+
+- (void)didMixFlvTag:(DDLiveFlvTag *)tag;
+
+@end
 
 @interface DDLiveFlvMixer : NSObject
+
+@property (nonatomic, weak) id<DDLiveFlvMixerDelegate> delegate;
+@property (nonatomic, strong) NSData *header;
+@property (nonatomic, strong) NSMutableData *body;
 
 @end

@@ -20,10 +20,15 @@
 		3A06C0CA20A52FC90097975E /* DDLiveFlvMixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0C920A52FC90097975E /* DDLiveFlvMixer.m */; };
 		3A06C0CD20A5314E0097975E /* DDLiveRtmpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0CC20A5314E0097975E /* DDLiveRtmpClient.m */; };
 		3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C0CF20A531BB0097975E /* DDLivePlayer.m */; };
+		6301953620A9786500CDBC85 /* DDLiveFlvTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301953520A9786500CDBC85 /* DDLiveFlvTag.m */; };
 		63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */; };
 		63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */; };
 		6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6305769D20A6C8D9006FC772 /* DDLiveTools.m */; };
 		633A73D920A86F720049E805 /* DDLivePCMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 633A73D820A86F720049E805 /* DDLivePCMPlayer.m */; };
+		6358FC4720A9FE9E00B62F44 /* DDLiveFlvTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358FC4620A9FE9E00B62F44 /* DDLiveFlvTagData.m */; };
+		6358FC4A20A9FEC200B62F44 /* DDLiveFlvAudioTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358FC4920A9FEC200B62F44 /* DDLiveFlvAudioTagData.m */; };
+		6358FC4D20A9FF1800B62F44 /* DDLiveFlvVideoTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358FC4C20A9FF1800B62F44 /* DDLiveFlvVideoTagData.m */; };
+		6358FC5320A9FF4D00B62F44 /* DDLiveFlvScriptTagData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358FC5220A9FF4D00B62F44 /* DDLiveFlvScriptTagData.m */; };
 		C9E04459E8A838CD848A0968 /* libPods-DDLive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +58,8 @@
 		3A06C0CC20A5314E0097975E /* DDLiveRtmpClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpClient.m; sourceTree = "<group>"; };
 		3A06C0CE20A531BB0097975E /* DDLivePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLivePlayer.h; sourceTree = "<group>"; };
 		3A06C0CF20A531BB0097975E /* DDLivePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLivePlayer.m; sourceTree = "<group>"; };
+		6301953420A9786500CDBC85 /* DDLiveFlvTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvTag.h; sourceTree = "<group>"; };
+		6301953520A9786500CDBC85 /* DDLiveFlvTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvTag.m; sourceTree = "<group>"; };
 		63030D7220A7EDC300524DB7 /* DDLiveCodecTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveCodecTools.h; sourceTree = "<group>"; };
 		63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveCodecTools.m; sourceTree = "<group>"; };
 		63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACEncoder.m; sourceTree = "<group>"; };
@@ -60,6 +67,14 @@
 		6305769D20A6C8D9006FC772 /* DDLiveTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveTools.m; sourceTree = "<group>"; };
 		633A73D720A86F720049E805 /* DDLivePCMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLivePCMPlayer.h; sourceTree = "<group>"; };
 		633A73D820A86F720049E805 /* DDLivePCMPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLivePCMPlayer.m; sourceTree = "<group>"; };
+		6358FC4520A9FE9E00B62F44 /* DDLiveFlvTagData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvTagData.h; sourceTree = "<group>"; };
+		6358FC4620A9FE9E00B62F44 /* DDLiveFlvTagData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvTagData.m; sourceTree = "<group>"; };
+		6358FC4820A9FEC200B62F44 /* DDLiveFlvAudioTagData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvAudioTagData.h; sourceTree = "<group>"; };
+		6358FC4920A9FEC200B62F44 /* DDLiveFlvAudioTagData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvAudioTagData.m; sourceTree = "<group>"; };
+		6358FC4B20A9FF1800B62F44 /* DDLiveFlvVideoTagData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvVideoTagData.h; sourceTree = "<group>"; };
+		6358FC4C20A9FF1800B62F44 /* DDLiveFlvVideoTagData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvVideoTagData.m; sourceTree = "<group>"; };
+		6358FC5120A9FF4D00B62F44 /* DDLiveFlvScriptTagData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvScriptTagData.h; sourceTree = "<group>"; };
+		6358FC5220A9FF4D00B62F44 /* DDLiveFlvScriptTagData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveFlvScriptTagData.m; sourceTree = "<group>"; };
 		94C728A1D438E57EB52E48DB /* Pods-DDLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.release.xcconfig"; sourceTree = "<group>"; };
 		F0201C2E73B8FD0E19488E71 /* Pods-DDLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.debug.xcconfig"; sourceTree = "<group>"; };
 		FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DDLive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +180,16 @@
 		3A06C0AF20A51A5A0097975E /* Transform */ = {
 			isa = PBXGroup;
 			children = (
+				6358FC4520A9FE9E00B62F44 /* DDLiveFlvTagData.h */,
+				6358FC4620A9FE9E00B62F44 /* DDLiveFlvTagData.m */,
+				6358FC4B20A9FF1800B62F44 /* DDLiveFlvVideoTagData.h */,
+				6358FC4C20A9FF1800B62F44 /* DDLiveFlvVideoTagData.m */,
+				6358FC4820A9FEC200B62F44 /* DDLiveFlvAudioTagData.h */,
+				6358FC4920A9FEC200B62F44 /* DDLiveFlvAudioTagData.m */,
+				6358FC5120A9FF4D00B62F44 /* DDLiveFlvScriptTagData.h */,
+				6358FC5220A9FF4D00B62F44 /* DDLiveFlvScriptTagData.m */,
+				6301953420A9786500CDBC85 /* DDLiveFlvTag.h */,
+				6301953520A9786500CDBC85 /* DDLiveFlvTag.m */,
 				3A06C0C820A52FC90097975E /* DDLiveFlvMixer.h */,
 				3A06C0C920A52FC90097975E /* DDLiveFlvMixer.m */,
 				3A06C0CB20A5314E0097975E /* DDLiveRtmpClient.h */,
@@ -286,17 +311,22 @@
 				3A06C0B820A51CAD0097975E /* DDLiveH264Decoder.m in Sources */,
 				3A06C0BB20A529980097975E /* DDLiveAVCapture.m in Sources */,
 				3A06C0CA20A52FC90097975E /* DDLiveFlvMixer.m in Sources */,
+				6358FC5320A9FF4D00B62F44 /* DDLiveFlvScriptTagData.m in Sources */,
 				3A06C09820A5193C0097975E /* ViewController.m in Sources */,
+				6301953620A9786500CDBC85 /* DDLiveFlvTag.m in Sources */,
 				6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */,
 				3A06C0A320A5193C0097975E /* main.m in Sources */,
 				3A06C0CD20A5314E0097975E /* DDLiveRtmpClient.m in Sources */,
 				3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */,
 				63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */,
 				633A73D920A86F720049E805 /* DDLivePCMPlayer.m in Sources */,
+				6358FC4A20A9FEC200B62F44 /* DDLiveFlvAudioTagData.m in Sources */,
 				3A06C0B520A51CA20097975E /* DDLiveH264Encoder.m in Sources */,
 				3A06C09520A5193C0097975E /* AppDelegate.m in Sources */,
 				63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */,
 				3A06C0C120A52A9D0097975E /* DDLiveAACDecoder.m in Sources */,
+				6358FC4720A9FE9E00B62F44 /* DDLiveFlvTagData.m in Sources */,
+				6358FC4D20A9FF1800B62F44 /* DDLiveFlvVideoTagData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

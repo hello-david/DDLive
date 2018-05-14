@@ -134,7 +134,7 @@ OSStatus decoderInInputDataProc(AudioConverterRef aAudioConverter,
             OSStatus status = AudioConverterFillComplexBuffer(_audioConverter,
                                                               decoderInInputDataProc,
                                                               &userData,
-                                                              &numFrames /* in/out */,
+                                                              &numFrames,
                                                               &decBuffer,
                                                               &outPacketDescription);
             if (status && status != kNoMoreDataErr) {

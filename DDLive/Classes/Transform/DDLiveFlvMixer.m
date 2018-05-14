@@ -8,6 +8,10 @@
 
 #import "DDLiveFlvMixer.h"
 
+@interface DDLiveFlvMixer()
+
+@end
+
 @implementation DDLiveFlvMixer
 
 @end
