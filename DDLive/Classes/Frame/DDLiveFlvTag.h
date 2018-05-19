@@ -24,6 +24,12 @@ typedef NS_ENUM(NSInteger,FlvTagType) {
 
 typedef UInt8 UInt24[3];
 
+/**
+ *  FLV的结构由header+body组成
+ *  body又由previousTagSize+tag组成
+ *  tag又由tagHeader+tagBody组成
+ */
+
 typedef struct __attribute__((packed)) {
     UInt24  signature;      // 文件标识，总为'FLV' 0x46 0x4c 0x66
     UInt8   version;        // 版本号0x01
@@ -39,15 +45,20 @@ typedef struct __attribute__((packed)) {
     UInt24  streamID;       // 总为0
 } DDLiveFlvTagHeader;
 
+typedef struct __attribute__((packed)) {
+    UInt32  size;           // 前一个tag size大小
+} DDLiveFlvPreviosTagSize;
+
 @interface DDLiveFlvTag : NSObject
 
-@property (nonatomic, readonly) NSData *tag;
-@property (nonatomic, readonly) NSData *header;
+@property (nonatomic, readonly) NSData *data;
+@property (nonatomic, readonly) NSData *tagHeader;
 @property (nonatomic, readonly) NSData *tagData;
 @property (nonatomic, readonly) FlvTagType tagType;
 @property (nonatomic, readonly) NSTimeInterval timestmap;// 毫秒级
 
 + (NSInteger)getTagDataSizeFromHeader:(NSData *)data;
++ (void)setUInt24:(UInt24)array hex:(UInt32)hex;
 
 - (instancetype)initWithTimestmap:(NSTimeInterval)timestmap tagData:(DDLiveFlvTagData *)tagData;
 - (instancetype)initWithTag:(NSData *)tag;

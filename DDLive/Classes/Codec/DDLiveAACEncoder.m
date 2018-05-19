@@ -190,7 +190,7 @@ OSStatus encoderInInputDataProc(AudioConverterRef inAudioConverter,
         NSData *data = nil;
         if (status == 0) {
             NSData *rawAAC = [NSData dataWithBytes:outAudioBufferList.mBuffers[0].mData length:outAudioBufferList.mBuffers[0].mDataByteSize];
-            NSData *adtsHeader = [DDLiveCodecTools adtsDataForPacketLength:rawAAC.length];
+            NSData *adtsHeader = [DDLiveCodecTools adtsDataWithPacketLength:rawAAC.length];
             NSMutableData *fullData = [NSMutableData dataWithData:adtsHeader];
             [fullData appendData:rawAAC];
             data = fullData;

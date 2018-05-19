@@ -7,4 +7,5 @@ target 'DDLive' do
 
   # Pods for DDLive
   pod 'Masonry', '~> 1.1.0'
+  pod 'CocoaAsyncSocket', '~> 7.6.3'
 end

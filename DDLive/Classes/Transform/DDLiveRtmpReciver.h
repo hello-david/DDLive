@@ -1,13 +1,13 @@
 //
-//  DDLiveRtmpClient.h
+//  DDLiveRtmpReciver.h
 //  DDLive
 //
-//  Created by Ming on 2018/5/11.
+//  Created by David on 2018/5/19.
 //  Copyright © 2018年 David.Dai. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface DDLiveRtmpClient : NSObject
+@interface DDLiveRtmpReciver : NSObject
 
 @end

@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger,DDLiveH264FrameType)
 
 @interface DDLiveCodecTools : NSObject
 
-+ (NSData *)adtsDataForPacketLength:(NSUInteger)packetLength;
++ (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu;
++ (NSData *)adtsDataWithPacketLength:(NSUInteger)packetLength;
 + (NSData *)aacRawDataFromADTSAAC:(NSData *)adtsAAC;
 
 @end

@@ -18,7 +18,6 @@
 @interface DDLiveH264Decoder : NSObject
 @property (nonatomic, weak) id<DDLiveH264DecoderDelegate> delegate;
 
-+ (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu;
 - (instancetype)initWithDelegate:(id<DDLiveH264DecoderDelegate>)delegate;
 - (void)decodeH264WithNaluStream:(NSData *)nalus;
 - (void)decodeH264WithAVAsset:(AVAsset *)asset;

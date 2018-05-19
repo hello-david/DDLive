@@ -21,16 +21,8 @@
 
 @implementation DDLiveH264Decoder
 
-+ (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu {
-    NSInteger nalType;
-    if(nalu.length < 4) return 0;
-    [nalu getBytes:&nalType range:NSMakeRange(4, 1)];
-    nalType = nalType & 0x1F;
-    return nalType;
-}
-
 - (instancetype)initWithDelegate:(id<DDLiveH264DecoderDelegate>)delegate {
-    if(self = [super init]){
+    if (self = [super init]) {
         self.delegate = delegate;
         _decodeThread = dispatch_queue_create("com.ddlive.h264decoder", NULL);
     }
@@ -56,7 +48,7 @@
     }
     
     //clean config
-    if(_videoFormatDESC != NULL) {
+    if (_videoFormatDESC != NULL) {
         CFRelease(_videoFormatDESC);
         _videoFormatDESC = NULL;
     }
@@ -81,7 +73,7 @@
     const size_t paraSetSizes[2] = {_spsData.length, _ppsData.length };
     
     //src video fomat config
-    if(!_spsData||!_ppsData)
+    if (!_spsData||!_ppsData)
     {
         NSLog(@"H264 Decoder Do not have sps or pps!");
         return status;
@@ -133,7 +125,7 @@
 {
     if(!nalu.length)return;
     
-    NSInteger naluType = [DDLiveH264Decoder getH264NaluType:nalu];
+    NSInteger naluType = [DDLiveCodecTools getH264NaluType:nalu];
     switch (naluType) {
         case kH264FrameTypeSPS: {
             NSLog(@"H264 Decoder Get SPS NALU");
@@ -167,7 +159,7 @@
     
     //init decoder
     OSStatus initState = [self h264DecoderSessionInit];
-    if(initState != noErr) {
+    if (initState != noErr) {
         [self stopDecoder];
         if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]) {
             [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Init Session Error" code:initState userInfo:nil]];
@@ -207,7 +199,7 @@
                                                 streamLen,        //len
                                                 0,
                                                 &blockBuffer);    //handle
-    if(status != kCMBlockBufferNoErr) {
+    if (status != kCMBlockBufferNoErr) {
         NSLog(@"H264 Decoder nalu decode buffer create err");
         free(data);
         
@@ -255,7 +247,7 @@
     if(status != noErr) {
         NSLog(@"H264 Decoder: decode error status = %d", (int)status);
         [self stopDecoder];
-        if(self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didH264DecompressError:)]) {
             [self.delegate didH264DecompressError:[NSError errorWithDomain:@"H264 Decoders decode failed" code:status userInfo:nil]];
         }
     }
@@ -273,7 +265,7 @@ static void didDecompress(void *decompressionOutputRefCon,
     UIImage *image = [DDLiveTools pixelBufferToImage:pixelBuffer];
     
     DDLiveH264Decoder *decoder = (__bridge DDLiveH264Decoder *)decompressionOutputRefCon;
-    if(decoder.delegate && [decoder.delegate respondsToSelector:@selector(didH264Decompress:)]){
+    if (decoder.delegate && [decoder.delegate respondsToSelector:@selector(didH264Decompress:)]) {
         [decoder.delegate didH264Decompress:image];
     }
 }

@@ -9,6 +9,15 @@
 #import "DDLiveCodecTools.h"
 
 @implementation DDLiveCodecTools
+
++ (DDLiveH264FrameType)getH264NaluType:(NSData *)nalu {
+    NSInteger nalType;
+    if(nalu.length < 4) return 0;
+    [nalu getBytes:&nalType range:NSMakeRange(4, 1)];
+    nalType = nalType & 0x1F;
+    return nalType;
+}
+
 /**
  *  Add ADTS header at the beginning of each and every AAC packet.
  *  This is needed as MediaCodec encoder generates a packet of raw
@@ -18,7 +27,7 @@
  *  See: http://wiki.multimedia.cx/index.php?title=ADTS
  *  Also: http://wiki.multimedia.cx/index.php?title=MPEG-4_Audio#Channel_Configurations
  **/
-+ (NSData *)adtsDataForPacketLength:(NSUInteger)packetLength {
++ (NSData *)adtsDataWithPacketLength:(NSUInteger)packetLength {
     int adtsLength = 7;
     char *packet = malloc(sizeof(char) * adtsLength);
     // Variables Recycled by addADTStoPacket

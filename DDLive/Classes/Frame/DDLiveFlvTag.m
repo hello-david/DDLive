@@ -11,8 +11,8 @@
 @interface DDLiveFlvTag()
 @property (nonatomic, assign) FlvTagType tagType;
 @property (nonatomic, assign) NSTimeInterval timestmap;
-@property (nonatomic, strong) NSData *tag;
-@property (nonatomic, strong) NSData *header;
+@property (nonatomic, strong) NSData *data;
+@property (nonatomic, strong) NSData *tagHeader;
 @property (nonatomic, strong) NSData *tagData;
 @end
 
@@ -31,9 +31,9 @@
 - (instancetype)initWithTag:(NSData *)tag {
     if(self = [super init]) {
         if(tag.length > kFlvTagHeaderLength) {
-            self.tag     = tag;
-            self.header  = [tag subdataWithRange:NSMakeRange(0, kFlvTagHeaderLength)];
-            self.tagData = [tag subdataWithRange:NSMakeRange(kFlvTagHeaderLength, tag.length - kFlvTagHeaderLength)];
+            self.data       = tag;
+            self.tagHeader  = [tag subdataWithRange:NSMakeRange(0, kFlvTagHeaderLength)];
+            self.tagData    = [tag subdataWithRange:NSMakeRange(kFlvTagHeaderLength, tag.length - kFlvTagHeaderLength)];
             
             DDLiveFlvTagHeader tagHeader;
             [tag getBytes:&tagHeader length:sizeof(tagHeader)];
@@ -60,18 +60,18 @@
     
     DDLiveFlvTagHeader tagHeader;
     tagHeader.type = (UInt8)self.tagType;
-    [self setUInt24:tagHeader.dataSize hex:(UInt32)self.tagData.length];
-    [self setUInt24:tagHeader.timestmap hex:(UInt32)self.timestmap];
+    [DDLiveFlvTag setUInt24:tagHeader.dataSize hex:(UInt32)self.tagData.length];
+    [DDLiveFlvTag setUInt24:tagHeader.timestmap hex:(UInt32)self.timestmap];
     tagHeader.timestmap_ex = ((UInt32)self.timestmap) >> 24;
-    [self setUInt24:tagHeader.streamID hex:0];
+    [DDLiveFlvTag setUInt24:tagHeader.streamID hex:0];
     
-    self.header = [NSData dataWithBytes:&tagHeader length:sizeof(tagHeader)];
-    NSMutableData *fullData = [NSMutableData dataWithData:self.header];
+    self.tagHeader = [NSData dataWithBytes:&tagHeader length:sizeof(tagHeader)];
+    NSMutableData *fullData = [NSMutableData dataWithData:self.tagHeader];
     [fullData appendData:self.tagData];
-    self.tag = fullData;
+    self.data = fullData;
 }
 
-- (void)setUInt24:(UInt24)array hex:(UInt32)hex {
++ (void)setUInt24:(UInt24)array hex:(UInt32)hex {
     if(hex >= (0x01 << 25)) {
         NSLog(@"DDLiveTag overflow");
     }

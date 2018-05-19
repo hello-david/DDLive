@@ -11,14 +11,16 @@
 
 @protocol DDLiveFlvMixerDelegate
 
-- (void)didMixFlvTag:(DDLiveFlvTag *)tag;
+- (void)didMixFlvData:(NSData *)data timestmap:(NSTimeInterval)timestmap;
 
 @end
 
 @interface DDLiveFlvMixer : NSObject
 
 @property (nonatomic, weak) id<DDLiveFlvMixerDelegate> delegate;
-@property (nonatomic, strong) NSData *header;
-@property (nonatomic, strong) NSMutableData *body;
+@property (nonatomic, assign) BOOL isStartMixer;
+
+- (instancetype)initWithDelegate:(id<DDLiveFlvMixerDelegate>)delegate;
+- (void)mixFlvData:(DDLiveFlvTagData *)tagData;
 
 @end
