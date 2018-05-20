@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger,RtmpSessionState) {
 @end
 
 @interface DDLiveRtmpSession : NSObject <GCDAsyncSocketDelegate,DDLiveRtmpChunkDelegate>
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSURL *url;
 @property (nonatomic, assign) RtmpSessionState state;
 @property (nonatomic, strong) DDLiveRtmpChunk *chunkManager;
 

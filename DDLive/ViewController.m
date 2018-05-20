@@ -17,8 +17,9 @@
 #import "DDLiveAACDecoder.h"
 #import "DDLivePCMPlayer.h"
 #import "DDLiveFlvTag.h"
+#import "DDLiveRtmpPublisher.h"
 
-@interface ViewController () <DDLiveAVCaptureDelegate, DDLiveH264EncoderDelegate, DDLiveH264DecoderDelegate>
+@interface ViewController () <DDLiveAVCaptureDelegate, DDLiveH264EncoderDelegate, DDLiveH264DecoderDelegate,DDLiveRtmpPublisherDelegate>
 @property (nonatomic, strong) UIImageView *cameraImageView;
 @property (nonatomic, strong) DDLiveAVCapture *capture;
 @property (nonatomic, strong) DDLiveH264Encoder *h264Encoder;
@@ -26,6 +27,8 @@
 @property (nonatomic, strong) DDLiveAACEncoder *aacEncoder;
 @property (nonatomic, strong) DDLiveAACDecoder *aacDecoder;
 @property (nonatomic, strong) DDLivePCMPlayer  *pcmPlayer;
+
+@property (nonatomic, strong) DDLiveRtmpPublisher *publisher;
 @end
 
 @implementation ViewController
@@ -39,8 +42,9 @@
         make.height.equalTo(@400);
     }];
     
-    [self.capture setupCaptureSession];
-    [self.capture start];
+//    [self.capture setupCaptureSession];
+//    [self.capture start];
+    [self.publisher connectToHost:nil port:0];
 }
 
 #pragma mark - Delegate
@@ -72,6 +76,10 @@
 }
 
 - (void)didH264DecompressError:(NSError *)error {
+    
+}
+
+- (void)didRtmpSessionStateChange:(RtmpSessionState)state {
     
 }
 #pragma mark - Property
@@ -123,5 +131,12 @@
         _pcmPlayer = [[DDLivePCMPlayer alloc]init];
     }
     return _pcmPlayer;
+}
+
+- (DDLiveRtmpPublisher *)publisher {
+    if(!_publisher) {
+        _publisher = [[DDLiveRtmpPublisher alloc]initWithDelegate:self];
+    }
+    return _publisher;
 }
 @end

@@ -38,11 +38,12 @@
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToUrl:(NSURL *)url {
-    
+    [super socket:sock didConnectToUrl:url];
     
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    [super socketDidDisconnect:sock withError:err];
     
 }
 @end
