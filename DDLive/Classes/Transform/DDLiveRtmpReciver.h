@@ -6,8 +6,8 @@
 //  Copyright © 2018年 David.Dai. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "DDLiveRtmpSession.h"
 
-@interface DDLiveRtmpReciver : NSObject
+@interface DDLiveRtmpReciver : DDLiveRtmpSession
 
 @end

@@ -47,27 +47,27 @@
     if(!self.isStartMixer) {
         self.isStartMixer = YES;
         self.staredTime = [[NSDate date] timeIntervalSince1970] * 1000;
-        if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestmap:)]) {
-            [self.delegate didMixFlvData:self.header timestmap:0];
+        if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestamp:)]) {
+            [self.delegate didMixFlvData:self.header timestamp:0];
         }
         
         NSData *firstTagSize = [NSData dataWithBytes:&previosTagSize length:sizeof(previosTagSize)];
-        if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestmap:)]) {
-            [self.delegate didMixFlvData:firstTagSize timestmap:0];
+        if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestamp:)]) {
+            [self.delegate didMixFlvData:firstTagSize timestamp:0];
         }
     }
     
     // 生成tag并序列化
     NSTimeInterval currentTimeStmap = [[NSDate date] timeIntervalSince1970] * 1000 - self.staredTime;
-    DDLiveFlvTag *tag = [[DDLiveFlvTag alloc]initWithTimestmap:currentTimeStmap tagData:tagData];
-    if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestmap:)]) {
-        [self.delegate didMixFlvData:tag.data timestmap:currentTimeStmap];
+    DDLiveFlvTag *tag = [[DDLiveFlvTag alloc]initWithTimestamp:currentTimeStmap tagData:tagData];
+    if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestamp:)]) {
+        [self.delegate didMixFlvData:tag.data timestamp:currentTimeStmap];
     }
     
     previosTagSize.size = (UInt32)tag.data.length;
     NSData *thisTagSize = [NSData dataWithBytes:&previosTagSize length:sizeof(previosTagSize)];
-    if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestmap:)]) {
-        [self.delegate didMixFlvData:thisTagSize timestmap:currentTimeStmap];
+    if(self.delegate && [(id)self.delegate respondsToSelector:@selector(didMixFlvData:timestamp:)]) {
+        [self.delegate didMixFlvData:thisTagSize timestamp:currentTimeStmap];
     }
     
 }

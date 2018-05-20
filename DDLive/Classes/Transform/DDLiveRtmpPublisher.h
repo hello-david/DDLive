@@ -6,18 +6,17 @@
 //  Copyright © 2018年 David.Dai. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GCDAsyncSocket.h"
+#import "DDLiveRtmpSession.h"
 
-@protocol DDLiveRtmpPublisherDelegate
+@protocol DDLiveRtmpPublisherDelegate <DDLiveRtmpSessionDelegate>
 
 @end
 
-@interface DDLiveRtmpPublisher : NSObject
+@interface DDLiveRtmpPublisher : DDLiveRtmpSession
 
-@property (nonatomic, copy) NSString *url;
 @property (nonatomic, weak) id<DDLiveRtmpPublisherDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id<DDLiveRtmpPublisherDelegate>)aDelegate;
+- (void)sendFrame:(NSData *)flvFrame;
 
 @end

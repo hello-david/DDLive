@@ -11,7 +11,7 @@
 
 @protocol DDLiveFlvMixerDelegate
 
-- (void)didMixFlvData:(NSData *)data timestmap:(NSTimeInterval)timestmap;
+- (void)didMixFlvData:(NSData *)data timestamp:(NSTimeInterval)timestamp;
 
 @end
 

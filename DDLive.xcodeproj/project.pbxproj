@@ -30,7 +30,10 @@
 		63030D7420A7EDC300524DB7 /* DDLiveCodecTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7320A7EDC300524DB7 /* DDLiveCodecTools.m */; };
 		63030D7620A7EE7400524DB7 /* DDLiveAACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */; };
 		6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 6305769D20A6C8D9006FC772 /* DDLiveTools.m */; };
+		630983C520B08873009229C4 /* DDLiveRtmpSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 630983C420B08873009229C4 /* DDLiveRtmpSession.m */; };
 		6309BF8D20B0207900996668 /* DDLiveRtmpReciver.m in Sources */ = {isa = PBXBuildFile; fileRef = 6309BF8C20B0207900996668 /* DDLiveRtmpReciver.m */; };
+		6309BF9020B0237A00996668 /* DDLiveRtmpChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 6309BF8F20B0237A00996668 /* DDLiveRtmpChunk.m */; };
+		6309BF9320B0240200996668 /* DDLiveRtmpMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6309BF9220B0240200996668 /* DDLiveRtmpMessage.m */; };
 		633A73D920A86F720049E805 /* DDLivePCMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 633A73D820A86F720049E805 /* DDLivePCMPlayer.m */; };
 		C9E04459E8A838CD848A0968 /* libPods-DDLive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3C1A47386EC04ED10ABF1C /* libPods-DDLive.a */; };
 /* End PBXBuildFile section */
@@ -80,8 +83,16 @@
 		63030D7520A7EE7400524DB7 /* DDLiveAACEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLiveAACEncoder.m; sourceTree = "<group>"; };
 		6305769C20A6C8D9006FC772 /* DDLiveTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveTools.h; sourceTree = "<group>"; };
 		6305769D20A6C8D9006FC772 /* DDLiveTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveTools.m; sourceTree = "<group>"; };
+		63095F9720B0588B002B3CCD /* DDLiveFlvTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveFlvTypes.h; sourceTree = "<group>"; };
+		63095F9920B0591F002B3CCD /* DDLiveRtmpTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpTypes.h; sourceTree = "<group>"; };
+		630983C320B08873009229C4 /* DDLiveRtmpSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpSession.h; sourceTree = "<group>"; };
+		630983C420B08873009229C4 /* DDLiveRtmpSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpSession.m; sourceTree = "<group>"; };
 		6309BF8B20B0207900996668 /* DDLiveRtmpReciver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpReciver.h; sourceTree = "<group>"; };
 		6309BF8C20B0207900996668 /* DDLiveRtmpReciver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpReciver.m; sourceTree = "<group>"; };
+		6309BF8E20B0237A00996668 /* DDLiveRtmpChunk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpChunk.h; sourceTree = "<group>"; };
+		6309BF8F20B0237A00996668 /* DDLiveRtmpChunk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpChunk.m; sourceTree = "<group>"; };
+		6309BF9120B0240200996668 /* DDLiveRtmpMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLiveRtmpMessage.h; sourceTree = "<group>"; };
+		6309BF9220B0240200996668 /* DDLiveRtmpMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLiveRtmpMessage.m; sourceTree = "<group>"; };
 		633A73D720A86F720049E805 /* DDLivePCMPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDLivePCMPlayer.h; sourceTree = "<group>"; };
 		633A73D820A86F720049E805 /* DDLivePCMPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDLivePCMPlayer.m; sourceTree = "<group>"; };
 		94C728A1D438E57EB52E48DB /* Pods-DDLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DDLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DDLive/Pods-DDLive.release.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +203,13 @@
 		3A06C0AF20A51A5A0097975E /* Transform */ = {
 			isa = PBXGroup;
 			children = (
+				63095F9920B0591F002B3CCD /* DDLiveRtmpTypes.h */,
+				6309BF9120B0240200996668 /* DDLiveRtmpMessage.h */,
+				6309BF9220B0240200996668 /* DDLiveRtmpMessage.m */,
+				6309BF8E20B0237A00996668 /* DDLiveRtmpChunk.h */,
+				6309BF8F20B0237A00996668 /* DDLiveRtmpChunk.m */,
+				630983C320B08873009229C4 /* DDLiveRtmpSession.h */,
+				630983C420B08873009229C4 /* DDLiveRtmpSession.m */,
 				3A06C0CB20A5314E0097975E /* DDLiveRtmpPublisher.h */,
 				3A06C0CC20A5314E0097975E /* DDLiveRtmpPublisher.m */,
 				6309BF8B20B0207900996668 /* DDLiveRtmpReciver.h */,
@@ -203,6 +221,7 @@
 		630258D920B0107A0020A51A /* Frame */ = {
 			isa = PBXGroup;
 			children = (
+				63095F9720B0588B002B3CCD /* DDLiveFlvTypes.h */,
 				630258DC20B0107B0020A51A /* DDLiveFlvScriptTagData.h */,
 				630258E120B0107B0020A51A /* DDLiveFlvScriptTagData.m */,
 				630258DB20B0107B0020A51A /* DDLiveFlvAudioTagData.h */,
@@ -331,11 +350,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6309BF9020B0237A00996668 /* DDLiveRtmpChunk.m in Sources */,
 				3A06C0B820A51CAD0097975E /* DDLiveH264Decoder.m in Sources */,
 				3A06C0BB20A529980097975E /* DDLiveAVCapture.m in Sources */,
 				3A06C09820A5193C0097975E /* ViewController.m in Sources */,
 				6305769E20A6C8D9006FC772 /* DDLiveTools.m in Sources */,
 				3A06C0A320A5193C0097975E /* main.m in Sources */,
+				630983C520B08873009229C4 /* DDLiveRtmpSession.m in Sources */,
+				6309BF9320B0240200996668 /* DDLiveRtmpMessage.m in Sources */,
 				3A06C0CD20A5314E0097975E /* DDLiveRtmpPublisher.m in Sources */,
 				630258EA20B0107B0020A51A /* DDLiveFlvAudioTagData.m in Sources */,
 				3A06C0D020A531BB0097975E /* DDLivePlayer.m in Sources */,

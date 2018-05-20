@@ -8,10 +8,8 @@
 
 #import "DDLiveRtmpPublisher.h"
 
-@interface DDLiveRtmpPublisher() <GCDAsyncSocketDelegate>
+@interface DDLiveRtmpPublisher()
 
-@property (nonatomic, strong) GCDAsyncSocket *socket;
-@property (nonatomic, strong) dispatch_queue_t socketQueue;
 
 @end
 
@@ -20,22 +18,27 @@
 - (instancetype)initWithDelegate:(id<DDLiveRtmpPublisherDelegate>)aDelegate {
     if (self = [super init]) {
         self.delegate = aDelegate;
-        self.socketQueue = dispatch_queue_create("com.rtmpSocketQueue", NULL);
-        self.socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:_socketQueue];
     }
     return self;
 }
 
+- (void)sendFrame:(NSData *)flvFrame {
+    
+}
+
 #pragma mark - SocketDelegate
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    [super socket:sock didReadData:data withTag:tag];
     
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    [super socket:sock didWriteDataWithTag:tag];
     
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToUrl:(NSURL *)url {
+    
     
 }
 

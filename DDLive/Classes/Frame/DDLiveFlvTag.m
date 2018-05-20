@@ -10,7 +10,7 @@
 
 @interface DDLiveFlvTag()
 @property (nonatomic, assign) FlvTagType tagType;
-@property (nonatomic, assign) NSTimeInterval timestmap;
+@property (nonatomic, assign) NSTimeInterval timestamp;
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic, strong) NSData *tagHeader;
 @property (nonatomic, strong) NSData *tagData;
@@ -37,17 +37,17 @@
             
             DDLiveFlvTagHeader tagHeader;
             [tag getBytes:&tagHeader length:sizeof(tagHeader)];
-            self.timestmap = [DDLiveFlvTag timestmapWithUInt24:tagHeader.timestmap ex:tagHeader.timestmap_ex];
+            self.timestamp = [DDLiveFlvTag timestmapWithUInt24:tagHeader.timestamp ex:tagHeader.timestamp_ex];
             self.tagType = tagHeader.type;
         }
     }
     return self;
 }
 
-- (instancetype)initWithTimestmap:(NSTimeInterval)timestmap tagData:(DDLiveFlvTagData *)tagData {
+- (instancetype)initWithTimestamp:(NSTimeInterval)timestamp tagData:(DDLiveFlvTagData *)tagData {
     if(self = [super init]){
         self.tagData   = [tagData data];
-        self.timestmap = timestmap;
+        self.timestamp = timestamp;
         [self packgeFlvTag];
     }
     return self;
@@ -61,8 +61,8 @@
     DDLiveFlvTagHeader tagHeader;
     tagHeader.type = (UInt8)self.tagType;
     [DDLiveFlvTag setUInt24:tagHeader.dataSize hex:(UInt32)self.tagData.length];
-    [DDLiveFlvTag setUInt24:tagHeader.timestmap hex:(UInt32)self.timestmap];
-    tagHeader.timestmap_ex = ((UInt32)self.timestmap) >> 24;
+    [DDLiveFlvTag setUInt24:tagHeader.timestamp hex:(UInt32)self.timestamp];
+    tagHeader.timestamp_ex = ((UInt32)self.timestamp) >> 24;
     [DDLiveFlvTag setUInt24:tagHeader.streamID hex:0];
     
     self.tagHeader = [NSData dataWithBytes:&tagHeader length:sizeof(tagHeader)];
